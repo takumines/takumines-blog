@@ -1,5 +1,5 @@
-import Footer from "@/components/navigation/footer"
-import Header from "@/components/navigation/header"
+import Footer from "@/app/_components/navigation/footer"
+import Header from "@/app/_components/navigation/header"
 import { clsx } from "clsx"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
