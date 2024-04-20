@@ -5,7 +5,7 @@ import Link from "next/link"
 
 const ArticleSummaryCard = () => {
   return (
-    <div className="hover:scal-y-[1.02] rounded-xl bg-skyBlue drop-shadow-[0_0px_10px_rgba(0,0,0,0.6)] hover:translate-y-[-5px]">
+    <div className="hover:scal-y-[1.02] rounded-xl bg-skyBlue drop-shadow-[0_0px_10px_rgba(0,0,0,0.6)] duration-200 hover:translate-y-[-5px]">
       <Image
         alt="gazou"
         className="rounded-t-xl"
