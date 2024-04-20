@@ -5,7 +5,7 @@ const config: Config = {
   plugins: [],
   theme: {
     colors: {
-      black: "#01233B",
+      black: "#333333",
       blueGray: "#CEDAE2",
       skyBlue: "#65A5C9",
       white: "#FFFFFF",
