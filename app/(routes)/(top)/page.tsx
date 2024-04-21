@@ -1,5 +1,7 @@
 import ArticleSummaryCard from "@/app/(routes)/(top)/_components/article-summary-card"
+import Spinner from "@/app/_components/elements/spinner/spinner"
 import getArticleList from "@/app/_features/article/api/get-article-list"
+import { Suspense } from "react"
 
 const ArticleList = async () => {
   const articleList = await getArticleList()
@@ -16,7 +18,9 @@ const ArticleList = async () => {
 const Top = () => {
   return (
     <div className="mt-[56px]">
-      <ArticleList />
+      <Suspense fallback={<Spinner className="mx-auto" />}>
+        <ArticleList />
+      </Suspense>
     </div>
   )
 }

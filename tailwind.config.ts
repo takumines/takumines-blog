@@ -7,10 +7,10 @@ const config: Config = {
     colors: {
       black: "#333333",
       blueGray: "#CEDAE2",
+      limeGreen: "#ADFF2F",
       skyBlue: "#65A5C9",
       white: "#FFFFFF",
     },
-    extend: {},
   },
 }
 export default config

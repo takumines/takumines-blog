@@ -16,7 +16,7 @@ const ArticleSummaryCard = ({ article }: { article: Article }) => {
         src="/images/default_thumbnail.png"
         width={406}
       />
-      <div className="bg-gray-100 p-6 text-black">
+      <div className="p-6 text-black">
         <Link href={`/articles/${slug}`}>
           <h2 className="justify-center break-all text-[24px] font-bold">
             {title}
@@ -26,11 +26,11 @@ const ArticleSummaryCard = ({ article }: { article: Article }) => {
           {tags.map((tag) => (
             <div className="mr-3 flex items-center" key={tag}>
               <TagIcon
-                className="text-[#ADFF2F]/[.6] drop-shadow-[0_0px_4px_rgba(0,0,0,0.5)]"
+                className="text-limeGreen/[.6] drop-shadow-[0_0px_4px_rgba(0,0,0,0.5)]"
                 height={16}
                 width={16}
               />
-              <p className="ml-1 text-[16px] text-[#ADFF2F]/[.6] drop-shadow-[0_0px_4px_rgba(0,0,0,0.5)]">
+              <p className="ml-1 text-[16px] text-limeGreen/[.6] drop-shadow-[0_0px_4px_rgba(0,0,0,0.5)]">
                 {tag}
               </p>
             </div>
