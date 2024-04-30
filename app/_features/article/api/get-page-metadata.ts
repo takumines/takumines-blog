@@ -18,9 +18,6 @@ export const getPageMetaData = (post: PageObjectResponse): Article => {
   const { created_time, id, properties } = post
 
   const date = formatISODateTimeToDate(created_time)
-  const description = isRichText(properties.Description)
-    ? properties.Description.rich_text[0].plain_text
-    : ""
   const slug = isRichText(properties.Slug)
     ? properties.Slug.rich_text[0].plain_text
     : ""
@@ -33,7 +30,6 @@ export const getPageMetaData = (post: PageObjectResponse): Article => {
 
   return {
     date,
-    description,
     id,
     slug,
     tags,

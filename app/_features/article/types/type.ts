@@ -16,7 +16,6 @@ export type MultiSelectType = ExtractMultiSelectType<
 
 export type Article = {
   date: string
-  description: string
   id: string
   slug: string
   tags: string[]
