@@ -1,7 +1,2 @@
-import { Client } from "@notionhq/client"
-
-const notionClient = new Client({
-  auth: process.env.NOTION_SECRET_TOKEN || "dummy",
-})
-
-export default notionClient
+export * from "@/app/_lib/notion/client"
+export * from "@/app/_lib/notion/n2m"
