@@ -22,3 +22,7 @@ export type Article = {
   tags: string[]
   title: string
 }
+
+export type ArticleDetail = Article & {
+  content: string
+}
