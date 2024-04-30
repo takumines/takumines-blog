@@ -1,6 +1,6 @@
 import ArticleSummaryCard from "@/app/(routes)/(top)/_components/article-summary-card"
 import Spinner from "@/app/_components/elements/spinner/spinner"
-import getArticleList from "@/app/_features/article/api/get-article-list"
+import { getArticleList } from "@/app/_features/article/api"
 import { Suspense } from "react"
 
 const ArticleList = async () => {
