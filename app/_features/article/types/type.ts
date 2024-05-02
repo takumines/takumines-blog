@@ -1,17 +1,22 @@
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints"
 
-type ExtractMultiSelectType<T> = T extends {
-  multi_select: infer U
-  type: "multi_select"
-}
-  ? U
-  : never
+type ExtractPropertyType<T, K extends string> =
+  T extends Record<K, infer U> ? U : never
 
 /**
  * PageObjectResponseのプロパティの型からMultiSelectの型を抽出する
  */
-export type MultiSelectType = ExtractMultiSelectType<
-  PageObjectResponse["properties"][keyof PageObjectResponse["properties"]]
+export type MultiSelect = ExtractPropertyType<
+  PageObjectResponse["properties"][keyof PageObjectResponse["properties"]],
+  "multi_select"
+>
+
+/**
+ * PageObjectResponseのプロパティの型からFilesの型を抽出する
+ */
+export type Files = ExtractPropertyType<
+  PageObjectResponse["properties"][keyof PageObjectResponse["properties"]],
+  "files"
 >
 
 export type Article = {
@@ -19,6 +24,7 @@ export type Article = {
   id: string
   slug: string
   tags: string[]
+  thumbnail: string
   title: string
 }
 

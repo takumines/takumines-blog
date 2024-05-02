@@ -1,4 +1,4 @@
-import { MultiSelectType } from "@/app/_features/article/types/type"
+import { Files, MultiSelect } from "@/app/_features/article/types/type"
 import {
   PageObjectResponse,
   QueryDatabaseResponse,
@@ -43,6 +43,16 @@ export const isTitle = (
  */
 export const isMultiSelect = (
   property: any,
-): property is { multi_select: MultiSelectType } => {
+): property is { multi_select: MultiSelect } => {
   return property && property.type === "multi_select"
+}
+
+/**
+ * PropertyがFilesかどうかを判定する
+ *
+ * @param property
+ * @returns {property is {files: FilesType}}
+ */
+export const isFiles = (property: any): property is { files: Files } => {
+  return property && property.type === "files"
 }
