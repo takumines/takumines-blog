@@ -13,7 +13,7 @@ const ArticleSummaryCard = ({ article }: { article: Article }) => {
         alt="サムネイル画像"
         className="rounded-t-xl"
         height={232}
-        src="/images/default_thumbnail.png"
+        src={article.thumbnail}
         width={406}
       />
       <div className="p-6 text-black">
