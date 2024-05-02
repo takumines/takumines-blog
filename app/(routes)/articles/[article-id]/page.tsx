@@ -12,11 +12,8 @@ const ArticleDetailPage = async ({
     return <div>Article not found</div>
   }
 
-  console.log(article)
-
   return (
     <>
-      <div>Article {articleId}</div>
       <ArticleDetailContent content={article.content} />
     </>
   )
