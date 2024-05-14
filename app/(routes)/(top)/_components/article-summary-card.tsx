@@ -14,6 +14,10 @@ const ArticleSummaryCard = ({ article }: { article: Article }) => {
         className="rounded-t-xl"
         height={232}
         src={article.thumbnail}
+        style={{
+          height: "auto",
+          width: "100%",
+        }}
         width={406}
       />
       <div className="p-6 text-black">

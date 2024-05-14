@@ -20,7 +20,7 @@ const ArticleList = async () => {
   const articleList = await getArticleList()
 
   return (
-    <div className="grid grid-cols-2 gap-9">
+    <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
       {articleList.map((article) => (
         <ArticleSummaryCard article={article} key={article.id} />
       ))}
