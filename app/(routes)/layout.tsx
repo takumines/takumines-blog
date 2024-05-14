@@ -47,7 +47,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className="flex h-screen flex-col bg-blueGray">
+      <body className="flex h-screen flex-col bg-gray">
         <Header />
         <main className="mx-auto w-full max-w-4xl flex-1 px-6">{children}</main>
         <Footer />

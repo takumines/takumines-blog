@@ -3,7 +3,7 @@ import Link from "next/link"
 
 const Header = () => {
   return (
-    <header className="sticky top-0 z-10 bg-blueGray/[.95]">
+    <header className="sticky top-0 z-10 bg-gray/[.95]">
       <div className="mx-auto max-w-5xl px-6">
         <div className="h-14 leading-[54px]">
           <Link
