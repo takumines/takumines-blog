@@ -1,7 +1,20 @@
 import ArticleSummaryCard from "@/app/(routes)/(top)/_components/article-summary-card"
 import Spinner from "@/app/_components/elements/spinner/spinner"
 import { getArticleList } from "@/app/_features/article/api"
+import { BASE_METADATA } from "@/app/_lib/metadata"
+import { Metadata } from "next"
 import { Suspense } from "react"
+
+export const metadata: Metadata = {
+  ...BASE_METADATA,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    ...BASE_METADATA.openGraph,
+    url: "/",
+  },
+}
 
 const ArticleList = async () => {
   const articleList = await getArticleList()
