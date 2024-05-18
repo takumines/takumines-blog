@@ -6,6 +6,7 @@ const config: Config = {
   theme: {
     colors: {
       black: "#333333",
+      blue: "#1E90FF",
       gray: "#EBEDEF",
       limeGreen: "#ADFF2F",
       skyBlue: "#65A5C9",
