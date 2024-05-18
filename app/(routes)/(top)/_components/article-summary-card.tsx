@@ -22,7 +22,7 @@ const ArticleSummaryCard = ({ article }: { article: Article }) => {
           width={406}
         />
         <div className="p-6 text-black">
-          <h2 className="justify-center break-all text-[24px] font-bold">
+          <h2 className="justify-center break-all text-2xl font-bold">
             {title}
           </h2>
           <div className="mt-2 flex">
@@ -33,7 +33,7 @@ const ArticleSummaryCard = ({ article }: { article: Article }) => {
                   height={16}
                   width={16}
                 />
-                <p className="ml-1 text-[16px] text-limeGreen/[.6] drop-shadow-[0_0px_4px_rgba(0,0,0,0.5)]">
+                <p className="ml-1 text-base text-limeGreen/[.6] drop-shadow-[0_0px_4px_rgba(0,0,0,0.5)]">
                   {tag}
                 </p>
               </div>
@@ -41,7 +41,7 @@ const ArticleSummaryCard = ({ article }: { article: Article }) => {
           </div>
           <div className="flex items-center justify-end">
             <UpdatedAtIcon className="text-black/[.7]" height={20} width={20} />
-            <p className="ml-1 text-[16px] text-black/[.7]">{date}</p>
+            <p className="ml-1 text-base text-black/[.7]">{date}</p>
           </div>
         </div>
       </div>
