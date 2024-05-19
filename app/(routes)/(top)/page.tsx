@@ -20,7 +20,7 @@ const ArticleList = async () => {
   const articleList = await getArticleList()
 
   return (
-    <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-9">
       {articleList.map((article) => (
         <ArticleSummaryCard article={article} key={article.id} />
       ))}
@@ -30,11 +30,11 @@ const ArticleList = async () => {
 
 const Top = () => {
   return (
-    <div className="mt-[56px]">
-      <Suspense fallback={<Spinner className="mx-auto" />}>
+    <article className="mt-14">
+      <Suspense fallback={<Spinner className="flex justify-center" />}>
         <ArticleList />
       </Suspense>
-    </div>
+    </article>
   )
 }
 

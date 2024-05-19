@@ -9,7 +9,7 @@ const ArticleSummaryCard = ({ article }: { article: Article }) => {
 
   return (
     <Link href={`/articles/${slug}`}>
-      <div className="hover:scal-y-[1.02] rounded-xl bg-skyBlue drop-shadow-[0_0px_10px_rgba(0,0,0,0.6)] duration-200 hover:translate-y-[-5px]">
+      <article className="hover:scal-y-[1.02] rounded-xl bg-white drop-shadow-[0_0px_10px_rgba(0,0,0,0.3)] duration-200 hover:translate-y-[-5px]">
         <Image
           alt="サムネイル画像"
           className="rounded-t-xl"
@@ -21,30 +21,30 @@ const ArticleSummaryCard = ({ article }: { article: Article }) => {
           }}
           width={406}
         />
-        <div className="p-6 text-black">
-          <h2 className="line-clamp-2 h-16 justify-center break-all text-2xl font-bold">
+        <div className="p-4 text-zinc-800 sm:p-6">
+          <h2 className="line-clamp-2 justify-center break-all text-xl font-bold text-zinc-800 sm:text-2xl">
             {title}
           </h2>
           <div className="mt-2 flex">
             {tags.map((tag) => (
               <div className="mr-3 flex items-center" key={tag}>
                 <TagIcon
-                  className="text-limeGreen/[.6] drop-shadow-[0_0px_4px_rgba(0,0,0,0.5)]"
+                  className="text-green-400 drop-shadow-[0_0px_4px_rgba(0,0,0,0.2)]"
                   height={16}
                   width={16}
                 />
-                <p className="ml-1 text-base text-limeGreen/[.6] drop-shadow-[0_0px_4px_rgba(0,0,0,0.5)]">
+                <p className="ml-1 text-base text-green-400 drop-shadow-[0_0px_4px_rgba(0,0,0,0.2)]">
                   {tag}
                 </p>
               </div>
             ))}
           </div>
           <div className="flex items-center justify-end">
-            <UpdatedAtIcon className="text-black/[.7]" height={20} width={20} />
-            <p className="ml-1 text-base text-black/[.7]">{date}</p>
+            <UpdatedAtIcon className="text-zinc-400" height={20} width={20} />
+            <p className="ml-1 text-base text-zinc-400">{date}</p>
           </div>
         </div>
-      </div>
+      </article>
     </Link>
   )
 }

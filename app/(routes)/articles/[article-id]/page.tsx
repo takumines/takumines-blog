@@ -1,4 +1,6 @@
 import ArticleDetailContent from "@/app/(routes)/articles/[article-id]/_components/article-detail-content"
+import TagIcon from "@/app/_components/elements/icon/tag-icon"
+import UpdatedAtIcon from "@/app/_components/elements/icon/updated-at-icon"
 import { getArticleDetail } from "@/app/_features/article/api"
 import { BASE_METADATA } from "@/app/_lib/metadata"
 import { Metadata } from "next"
@@ -64,9 +66,34 @@ const ArticleDetailPage = async ({
   }
 
   return (
-    <>
+    <div className="mt-14">
+      <header className="flex flex-col">
+        <h1 className="text-4xl tracking-normal text-zinc-800 sm:text-5xl">
+          {article.title}
+        </h1>
+        <div className="mt-2 flex flex-col gap-1">
+          <div className="flex">
+            {article.tags.map((tag) => (
+              <div className="mr-3 flex items-center" key={tag}>
+                <TagIcon
+                  className="text-green-400 drop-shadow-[0_0px_4px_rgba(0,0,0,0.2)]"
+                  height={16}
+                  width={16}
+                />
+                <p className="ml-1 text-base text-green-500 drop-shadow-[0_0px_4px_rgba(0,0,0,0.2)]">
+                  {tag}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div className="flex items-center justify-start">
+            <UpdatedAtIcon className="text-zinc-400" height={20} width={20} />
+            <p className="ml-1 text-base text-zinc-400">{article.date}</p>
+          </div>
+        </div>
+      </header>
       <ArticleDetailContent content={article.content} />
-    </>
+    </div>
   )
 }
 
