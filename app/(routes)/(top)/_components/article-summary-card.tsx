@@ -22,7 +22,7 @@ const ArticleSummaryCard = ({ article }: { article: Article }) => {
           width={406}
         />
         <div className="p-6 text-black">
-          <h2 className="justify-center break-all text-2xl font-bold">
+          <h2 className="line-clamp-2 h-16 justify-center break-all text-2xl font-bold">
             {title}
           </h2>
           <div className="mt-2 flex">
