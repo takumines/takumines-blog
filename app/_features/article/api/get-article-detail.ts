@@ -19,10 +19,10 @@ export const getArticleDetail = async (
                 equals: id,
               },
             },
-            property: "Status",
+            property: "Slug",
           },
           {
-            property: "Slug",
+            property: "Status",
             select: {
               equals: "Publish",
             },
