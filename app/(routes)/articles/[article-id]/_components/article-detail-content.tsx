@@ -1,5 +1,6 @@
+import NextImage from "next/image"
 import Link from "next/link"
-import type { ComponentProps } from "react"
+import { ComponentProps } from "react"
 import ReactMarkdown from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism"
@@ -75,13 +76,48 @@ const Pre = ({ children }: ComponentProps<"pre">) => {
   )
 }
 
+const UnorderedList = ({ children }: ComponentProps<"ul">) => {
+  return <ul className="list-inside list-disc">{children}</ul>
+}
+
+const OrderedList = ({ children }: ComponentProps<"ol">) => {
+  return <ol className="list-inside list-decimal">{children}</ol>
+}
+
+const ListItem = ({ children }: ComponentProps<"li">) => {
+  return (
+    <li className="text-base leading-relaxed tracking-wide text-zinc-600">
+      {children}
+    </li>
+  )
+}
+
+const Image = (props: ComponentProps<"img">) => {
+  return (
+    <NextImage
+      alt={`画像の説明: ${props.alt ?? ""}`}
+      height={800}
+      src={props.src ?? "/images/default_thumbnail.png"}
+      style={{
+        height: "auto",
+        width: "100%",
+      }}
+      width={800}
+    />
+  )
+}
+
 const overrideComponent = {
   a: Anchor,
   h2: Heading2,
   h3: Heading3,
+  img: Image,
+  li: ListItem,
+  ol: OrderedList,
   p: Paragraph,
   pre: Pre,
   strong: Strong,
+  ul: UnorderedList,
 }
 
 const ArticleDetailContent = ({ content }: { content: string }) => {
