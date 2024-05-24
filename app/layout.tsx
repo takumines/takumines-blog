@@ -1,5 +1,5 @@
-import Footer from "@/app/_components/navigation/footer"
-import Header from "@/app/_components/navigation/header"
+import { Footer } from "@/app/_components/navigation/footer"
+import { Header } from "@/app/_components/navigation/header"
 import type { Metadata, Viewport } from "next"
 import { ReactNode } from "react"
 import "./globals.css"

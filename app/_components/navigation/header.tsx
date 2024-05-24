@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
-const Header = () => {
+export const Header = () => {
   return (
     <header className="fixed top-0 z-10 w-full bg-zinc-50/[95%]">
       <div className="mx-auto max-w-5xl px-6">
@@ -26,5 +26,3 @@ const Header = () => {
     </header>
   )
 }
-
-export default Header

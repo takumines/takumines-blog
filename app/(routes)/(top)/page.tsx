@@ -1,5 +1,5 @@
 import ArticleSummaryCard from "@/app/(routes)/(top)/_components/article-summary-card"
-import Spinner from "@/app/_components/elements/spinner/spinner"
+import { Spinner } from "@/app/_components/elements/spinner/spinner"
 import { getArticleList } from "@/app/_features/article/api"
 import { BASE_METADATA } from "@/app/_lib/metadata"
 import { Metadata } from "next"

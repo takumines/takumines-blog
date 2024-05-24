@@ -1,6 +1,6 @@
 import ArticleDetailContent from "@/app/(routes)/articles/[article-id]/_components/article-detail-content"
-import TagIcon from "@/app/_components/elements/icon/tag-icon"
-import UpdatedAtIcon from "@/app/_components/elements/icon/updated-at-icon"
+import { TagIcon } from "@/app/_components/elements/icon/tag-icon"
+import { UpdatedAtIcon } from "@/app/_components/elements/icon/updated-at-icon"
 import { getArticleDetail } from "@/app/_features/article/api"
 import { BASE_METADATA } from "@/app/_lib/metadata"
 import { Metadata } from "next"

@@ -1,11 +1,11 @@
 import { clsx } from "clsx"
 
-const Spinner = ({ className }: { className: string }) => {
+export const Spinner = ({ className }: { className: string }) => {
   return (
     <div className={clsx(className)} role="status">
       <svg
         aria-hidden="true"
-        className="size-8 animate-spin fill-limeGreen text-black/[0.6]"
+        className="fill-limeGreen size-8 animate-spin text-black/[0.6]"
         fill="none"
         viewBox="0 0 100 101"
         xmlns="http://www.w3.org/2000/svg"
@@ -23,5 +23,3 @@ const Spinner = ({ className }: { className: string }) => {
     </div>
   )
 }
-
-export default Spinner

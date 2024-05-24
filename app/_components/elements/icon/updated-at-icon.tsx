@@ -1,6 +1,6 @@
 import { SVGProps } from "react"
 
-const UpdatedAtIcon = (props: SVGProps<SVGSVGElement>) => {
+export const UpdatedAtIcon = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg
       height="1em"
@@ -16,5 +16,3 @@ const UpdatedAtIcon = (props: SVGProps<SVGSVGElement>) => {
     </svg>
   )
 }
-
-export default UpdatedAtIcon

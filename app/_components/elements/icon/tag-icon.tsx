@@ -1,6 +1,6 @@
 import { SVGProps } from "react"
 
-const TagIcon = (props: SVGProps<SVGSVGElement>) => {
+export const TagIcon = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg
       height="1em"
@@ -16,5 +16,3 @@ const TagIcon = (props: SVGProps<SVGSVGElement>) => {
     </svg>
   )
 }
-
-export default TagIcon

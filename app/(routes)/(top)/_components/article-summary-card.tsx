@@ -1,5 +1,5 @@
-import TagIcon from "@/app/_components/elements/icon/tag-icon"
-import UpdatedAtIcon from "@/app/_components/elements/icon/updated-at-icon"
+import { TagIcon } from "@/app/_components/elements/icon/tag-icon"
+import { UpdatedAtIcon } from "@/app/_components/elements/icon/updated-at-icon"
 import { Article } from "@/app/_features/article/types/type"
 import Image from "next/image"
 import Link from "next/link"
