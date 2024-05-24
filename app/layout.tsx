@@ -40,11 +40,11 @@ export const viewport: Viewport = {
   width: "device-width",
 }
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: ReactNode
-}>) {
+}>) => {
   return (
     <html lang="ja">
       <body className="flex h-screen flex-col bg-zinc-50">
@@ -57,3 +57,5 @@ export default function RootLayout({
     </html>
   )
 }
+
+export default RootLayout
