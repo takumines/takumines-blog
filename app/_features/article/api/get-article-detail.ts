@@ -1,4 +1,5 @@
 import { getPageMetaData } from "@/app/_features/article/api/get-page-metadata"
+import { NotionApiError } from "@/app/_features/article/error"
 import {
   ArticleDetail,
   isPageObjectResponse,
@@ -7,7 +8,7 @@ import { n2m, notionClient } from "@/app/_lib/notion"
 
 export const getArticleDetail = async (
   id: string,
-): Promise<ArticleDetail | undefined> => {
+): Promise<ArticleDetail | NotionApiError | undefined> => {
   try {
     const res = await notionClient.databases.query({
       database_id: process.env.NOTION_DATABASE_ID!,
@@ -46,7 +47,6 @@ export const getArticleDetail = async (
       content,
     }
   } catch (error) {
-    console.error(error)
-    return undefined
+    return new NotionApiError(error)
   }
 }

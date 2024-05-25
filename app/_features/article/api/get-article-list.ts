@@ -1,4 +1,5 @@
 import { getPageMetaData } from "@/app/_features/article/api/get-page-metadata"
+import { NotionApiError } from "@/app/_features/article/error"
 import { isPageObjectResponse } from "@/app/_features/article/types"
 import { Article } from "@/app/_features/article/types/type"
 import { notionClient } from "@/app/_lib/notion"
@@ -8,7 +9,7 @@ import { notionClient } from "@/app/_lib/notion"
  *
  * @returns {Promise<Article[]>}
  */
-export const getArticleList = async (): Promise<Article[]> => {
+export const getArticleList = async (): Promise<Article[] | NotionApiError> => {
   try {
     const res = await notionClient.databases.query({
       database_id: process.env.NOTION_DATABASE_ID!,
@@ -35,7 +36,6 @@ export const getArticleList = async (): Promise<Article[]> => {
       })
       .filter((article): article is Article => !!article)
   } catch (error) {
-    console.error(error)
-    return []
+    return new NotionApiError(error)
   }
 }
