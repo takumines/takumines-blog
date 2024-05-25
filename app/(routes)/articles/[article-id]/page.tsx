@@ -1,7 +1,9 @@
 import ArticleDetailContent from "@/app/(routes)/articles/[article-id]/_components/article-detail-content"
+import { LinkButton } from "@/app/_components/elements/button"
 import { TagIcon } from "@/app/_components/elements/icon/tag-icon"
 import { UpdatedAtIcon } from "@/app/_components/elements/icon/updated-at-icon"
 import { getArticleDetail } from "@/app/_features/article/api"
+import { NotionApiError } from "@/app/_features/article/error"
 import { BASE_METADATA } from "@/app/_lib/metadata"
 import { Metadata } from "next"
 
@@ -13,8 +15,7 @@ export const generateMetadata = async ({
   const response = await getArticleDetail(params["article-id"])
   const url = `/articles/${params["article-id"]}`
 
-  // NOTE: responseがない時と、responseがResponse型の時はデフォルト値を設定
-  if (!response || response instanceof Response) {
+  if (response instanceof NotionApiError || !response) {
     const titleForError = "記事詳細 | takumines blog"
     return {
       ...BASE_METADATA,
@@ -59,21 +60,30 @@ const ArticleDetailPage = async ({
 }: {
   params: { "article-id": string }
 }) => {
-  const article = await getArticleDetail(articleId)
+  const response = await getArticleDetail(articleId)
 
-  if (!article) {
-    return <div>Article not found</div>
+  if (response instanceof NotionApiError || !response) {
+    return (
+      <div className="mx-auto mt-[200px] text-center">
+        <h2 className="text-[32px] leading-[1.1] sm:text-[44px]">404</h2>
+        <h1 className="text-[56px] leading-[1.1] sm:text-[88px]">Not Found</h1>
+        <p className="mb-8 text-base">お探しのページが見つかりませんでした</p>
+        <LinkButton href="/" textSize="base" variant="primary">
+          TOPへ戻る
+        </LinkButton>
+      </div>
+    )
   }
 
   return (
     <div className="mt-14">
       <header className="flex flex-col">
         <h1 className="text-4xl tracking-normal text-zinc-800 sm:text-5xl">
-          {article.title}
+          {response.title}
         </h1>
         <div className="mt-2 flex flex-col gap-1">
           <div className="flex">
-            {article.tags.map((tag) => (
+            {response.tags.map((tag) => (
               <div className="mr-3 flex items-center" key={tag}>
                 <TagIcon
                   className="text-green-400 drop-shadow-[0_0px_4px_rgba(0,0,0,0.2)]"
@@ -88,11 +98,11 @@ const ArticleDetailPage = async ({
           </div>
           <div className="flex items-center justify-start">
             <UpdatedAtIcon className="text-zinc-400" height={20} width={20} />
-            <p className="ml-1 text-base text-zinc-400">{article.date}</p>
+            <p className="ml-1 text-base text-zinc-400">{response.date}</p>
           </div>
         </div>
       </header>
-      <ArticleDetailContent content={article.content} />
+      <ArticleDetailContent content={response.content} />
     </div>
   )
 }
