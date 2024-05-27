@@ -3,7 +3,11 @@ import { LinkButton } from "@/app/_components/elements/button"
 import { TagIcon } from "@/app/_components/elements/icon/tag-icon"
 import { UpdatedAtIcon } from "@/app/_components/elements/icon/updated-at-icon"
 import { getArticleDetail } from "@/app/_features/article/api"
-import { NotionApiError } from "@/app/_features/article/error"
+import {
+  INTERNAL_SERVER_ERROR_CODE,
+  NOT_FOUND_ERROR_CODE,
+  NotionApiError,
+} from "@/app/_features/article/error"
 import { BASE_METADATA } from "@/app/_lib/metadata"
 import { Metadata } from "next"
 
@@ -62,12 +66,34 @@ const ArticleDetailPage = async ({
 }) => {
   const response = await getArticleDetail(articleId)
 
-  if (response instanceof NotionApiError || !response) {
+  if (response instanceof NotionApiError) {
+    return (
+      <div className="mx-auto mt-[150px] text-center">
+        <h2 className="text-[32px] leading-[1.1] sm:text-[44px]">
+          {INTERNAL_SERVER_ERROR_CODE}
+        </h2>
+        <h1 className="text-[56px] leading-[1.1] sm:text-[88px]">
+          INTERNAL
+          <br />
+          SERVER
+          <br />
+          ERROR
+        </h1>
+        <p className="mt-8 text-base">
+          エラーが発生しました。お手数をおかけしますが、時間を置いて、もう一度お試しください。
+        </p>
+      </div>
+    )
+  }
+
+  if (!response) {
     return (
       <div className="mx-auto mt-[200px] text-center">
-        <h2 className="text-[32px] leading-[1.1] sm:text-[44px]">404</h2>
+        <h2 className="text-[32px] leading-[1.1] sm:text-[44px]">
+          {NOT_FOUND_ERROR_CODE}
+        </h2>
         <h1 className="text-[56px] leading-[1.1] sm:text-[88px]">Not Found</h1>
-        <p className="mb-8 text-base">お探しのページが見つかりませんでした</p>
+        <p className="my-8 text-base">お探しのページが見つかりませんでした</p>
         <LinkButton href="/" textSize="base" variant="primary">
           TOPへ戻る
         </LinkButton>
