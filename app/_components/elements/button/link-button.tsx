@@ -28,7 +28,7 @@ export const LinkButton = ({
   return (
     <Link
       className={clsx(
-        `inline-block rounded bg-white px-6 py-3 text-base`,
+        `inline-block rounded px-6 py-3 text-base`,
         variantStyles[variant],
         textSizeStyles[textSize],
       )}
