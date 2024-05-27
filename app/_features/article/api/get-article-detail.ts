@@ -32,9 +32,10 @@ export const getArticleDetail = async (
       },
     })
 
-    const pageObject = isPageObjectResponse(res.results[0])
-      ? res.results[0]
-      : undefined
+    const pageObject =
+      res.results.length > 0 && isPageObjectResponse(res.results[0])
+        ? res.results[0]
+        : undefined
 
     if (!pageObject) {
       return undefined
