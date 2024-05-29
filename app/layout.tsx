@@ -47,9 +47,9 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="ja">
-      <body className="flex h-screen w-full flex-col bg-zinc-50">
+      <body className="flex h-screen flex-col bg-zinc-50">
         <Header />
-        <main className="mx-auto mt-8 max-w-4xl flex-1 px-6 sm:mt-14">
+        <main className="mx-auto mt-8 w-full max-w-4xl flex-1 px-6 sm:mt-14">
           {children}
         </main>
         <Footer />
