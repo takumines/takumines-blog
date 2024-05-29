@@ -9,7 +9,10 @@ const ArticleSummaryCard = ({ article }: { article: Article }) => {
 
   return (
     <Link href={`/articles/${slug}`}>
-      <article className="hover:scal-y-[1.02] rounded-xl bg-white drop-shadow-[0_0px_10px_rgba(0,0,0,0.3)] duration-200 hover:translate-y-[-5px]">
+      <article
+        className="transform-gpu rounded-xl bg-white duration-200 hover:translate-y-[-5px]
+        hover:scale-[1.02] hover:transform-gpu hover:drop-shadow-[0_10px_10px_rgba(0,0,0,0.3)]"
+      >
         <Image
           alt="サムネイル画像"
           className="rounded-t-xl"
