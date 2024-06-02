@@ -5,7 +5,7 @@ import {
   INTERNAL_SERVER_ERROR_CODE,
   NotionApiError,
 } from "@/app/_features/article/error"
-import { BASE_METADATA } from "@/app/_lib/metadata"
+import { BASE_METADATA } from "@/app/_libs/metadata"
 import { Metadata } from "next"
 import { Suspense } from "react"
 

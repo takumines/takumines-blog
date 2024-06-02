@@ -8,7 +8,7 @@ import {
   NOT_FOUND_ERROR_CODE,
   NotionApiError,
 } from "@/app/_features/article/error"
-import { BASE_METADATA } from "@/app/_lib/metadata"
+import { BASE_METADATA } from "@/app/_libs/metadata"
 import { Metadata } from "next"
 
 export const generateMetadata = async ({

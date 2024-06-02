@@ -11,7 +11,7 @@ const ArticleSummaryCard = ({ article }: { article: Article }) => {
     <Link href={`/articles/${slug}`}>
       <article
         className="transform-gpu rounded-xl bg-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.2)] duration-200 hover:translate-y-[-5px]
-        hover:scale-[1.02] hover:transform-gpu hover:drop-shadow-[0_10px_10px_rgba(0,0,0,0.3)]"
+        hover:scale-[1.02] hover:transform-gpu hover:drop-shadow-[0_10px_10px_rgba(0,0,0,0.3)] dark:bg-zinc-800 dark:drop-shadow-[0_1px_1px_rgba(255,255,255,0.2)] dark:hover:drop-shadow-[0_10px_10px_rgba(255,255,255,0.6)]"
       >
         <Image
           alt="サムネイル画像"

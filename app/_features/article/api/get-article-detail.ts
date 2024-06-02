@@ -4,7 +4,7 @@ import {
   ArticleDetail,
   isPageObjectResponse,
 } from "@/app/_features/article/types"
-import { n2m, notionClient } from "@/app/_lib/notion"
+import { n2m, notionClient } from "@/app/_libs/notion"
 import { cache } from "react"
 
 export const getArticleDetail = cache(

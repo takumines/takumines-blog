@@ -1,4 +1,4 @@
-import { notionClient } from "@/app/_lib/notion/client"
+import { notionClient } from "@/app/_libs/notion/client"
 import { NotionToMarkdown } from "notion-to-md"
 
 export const n2m = async (id: string) => {

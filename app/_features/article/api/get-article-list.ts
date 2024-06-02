@@ -2,7 +2,7 @@ import { getPageMetaData } from "@/app/_features/article/api/get-page-metadata"
 import { NotionApiError } from "@/app/_features/article/error"
 import { isPageObjectResponse } from "@/app/_features/article/types"
 import { Article } from "@/app/_features/article/types/type"
-import { notionClient } from "@/app/_lib/notion"
+import { notionClient } from "@/app/_libs/notion"
 
 /**
  * 記事一覧を取得
