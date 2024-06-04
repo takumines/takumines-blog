@@ -104,7 +104,7 @@ const ArticleDetailPage = async ({
   return (
     <div className="mt-14">
       <header className="flex flex-col">
-        <h1 className="text-4xl tracking-normal text-zinc-800 sm:text-5xl">
+        <h1 className="text-4xl tracking-normal text-zinc-800 dark:text-zinc-50 sm:text-5xl">
           {response.title}
         </h1>
         <div className="mt-2 flex flex-col gap-1">

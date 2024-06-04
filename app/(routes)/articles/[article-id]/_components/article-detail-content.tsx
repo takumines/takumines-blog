@@ -7,7 +7,7 @@ import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism"
 
 const Heading2 = ({ children }: ComponentProps<"h2">) => {
   return (
-    <h2 className="mb-5 mt-9 text-3xl tracking-wide text-zinc-800 sm:text-4xl">
+    <h2 className="mb-5 mt-9 text-3xl tracking-wide text-zinc-800 dark:text-zinc-50 sm:text-4xl">
       {children}
     </h2>
   )
@@ -15,7 +15,7 @@ const Heading2 = ({ children }: ComponentProps<"h2">) => {
 
 const Heading3 = ({ children }: ComponentProps<"h3">) => {
   return (
-    <h3 className="mb-4 mt-8 text-2xl tracking-wide text-zinc-800 sm:text-3xl">
+    <h3 className="mb-4 mt-8 text-2xl tracking-wide text-zinc-800 dark:text-zinc-50 sm:text-3xl">
       {children}
     </h3>
   )
@@ -23,7 +23,7 @@ const Heading3 = ({ children }: ComponentProps<"h3">) => {
 
 const Paragraph = ({ children }: ComponentProps<"p">) => {
   return (
-    <p className="mt-4 text-base leading-relaxed tracking-wide text-zinc-600">
+    <p className="mt-4 text-base leading-relaxed tracking-wide text-zinc-600 dark:text-zinc-200">
       {children}
     </p>
   )
@@ -31,7 +31,7 @@ const Paragraph = ({ children }: ComponentProps<"p">) => {
 
 const Strong = ({ children }: ComponentProps<"strong">) => {
   return (
-    <strong className="mt-4 text-base font-bold leading-relaxed tracking-wide text-zinc-600">
+    <strong className="mt-4 text-base font-bold leading-relaxed tracking-wide text-zinc-600 dark:text-zinc-200">
       {children}
     </strong>
   )
@@ -86,7 +86,7 @@ const OrderedList = ({ children }: ComponentProps<"ol">) => {
 
 const ListItem = ({ children }: ComponentProps<"li">) => {
   return (
-    <li className="text-base leading-relaxed tracking-wide text-zinc-600">
+    <li className="text-base leading-relaxed tracking-wide text-zinc-600 dark:text-zinc-50">
       {children}
     </li>
   )

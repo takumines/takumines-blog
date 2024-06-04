@@ -1,8 +1,9 @@
-import { Footer } from "@/app/_components/navigation/footer"
-import { Header } from "@/app/_components/navigation/header"
 import type { Metadata, Viewport } from "next"
 import { ReactNode } from "react"
 import "./globals.css"
+
+import { Footer, Header } from "@/app/_components/navigation"
+import { Provider as ThemeProvider } from "@/app/_themes"
 
 const META_TITLE = "takumines blog"
 const META_DESCRIPTION = "Personal blog by takumines"
@@ -46,13 +47,15 @@ const RootLayout = ({
   children: ReactNode
 }>) => {
   return (
-    <html lang="ja">
-      <body className="flex h-screen flex-col bg-zinc-50">
-        <Header />
-        <main className="mx-auto mt-8 w-full max-w-4xl flex-1 px-6 sm:mt-14">
-          {children}
-        </main>
-        <Footer />
+    <html lang="ja" suppressHydrationWarning>
+      <body className="flex h-screen flex-col bg-zinc-50 dark:bg-zinc-900">
+        <ThemeProvider>
+          <Header />
+          <main className="mx-auto mt-8 w-full max-w-4xl flex-1 px-6 sm:mt-14">
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   )
