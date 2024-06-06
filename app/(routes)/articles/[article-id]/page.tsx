@@ -71,18 +71,18 @@ const ArticleDetailPage = async ({
 
   if (response instanceof NotionApiError) {
     return (
-      <div className="mx-auto mt-[150px] text-center">
-        <h2 className="text-[32px] leading-[1.1] sm:text-[44px]">
+      <div className="mx-auto mt-[150px] text-center ">
+        <h2 className="text-[32px] leading-[1.1] text-zinc-800 dark:text-zinc-50 sm:text-[44px]">
           {INTERNAL_SERVER_ERROR_CODE}
         </h2>
-        <h1 className="text-[56px] leading-[1.1] sm:text-[88px]">
+        <h1 className="text-[56px] leading-[1.1] text-zinc-800 dark:text-zinc-50 sm:text-[88px]">
           INTERNAL
           <br />
           SERVER
           <br />
           ERROR
         </h1>
-        <p className="mt-8 text-base">
+        <p className="mt-8 text-base text-zinc-800 dark:text-zinc-50">
           エラーが発生しました。お手数をおかけしますが、時間を置いて、もう一度お試しください。
         </p>
       </div>
@@ -92,11 +92,15 @@ const ArticleDetailPage = async ({
   if (!response) {
     return (
       <div className="mx-auto mt-[200px] text-center">
-        <h2 className="text-[32px] leading-[1.1] sm:text-[44px]">
+        <h2 className="text-[32px] leading-[1.1] text-zinc-800 dark:text-zinc-50 sm:text-[44px]">
           {NOT_FOUND_ERROR_CODE}
         </h2>
-        <h1 className="text-[56px] leading-[1.1] sm:text-[88px]">Not Found</h1>
-        <p className="my-8 text-base">お探しのページが見つかりませんでした</p>
+        <h1 className="text-[56px] leading-[1.1] text-zinc-800 dark:text-zinc-50 sm:text-[88px]">
+          Not Found
+        </h1>
+        <p className="my-8 text-base text-zinc-800 dark:text-zinc-50">
+          お探しのページが見つかりませんでした
+        </p>
         <LinkButton href="/" textSize="base" variant="primary">
           TOPへ戻る
         </LinkButton>
