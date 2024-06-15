@@ -126,7 +126,6 @@ const overrideComponent = {
 }
 
 const ArticleDetailContent = ({ content }: { content: string }) => {
-  console.log(content)
   return (
     <>
       <ReactMarkdown components={overrideComponent}>{content}</ReactMarkdown>
