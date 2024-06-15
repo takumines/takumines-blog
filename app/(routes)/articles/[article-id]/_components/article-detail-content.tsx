@@ -56,13 +56,17 @@ const Anchor = ({ children, href }: ComponentProps<"a">) => {
   )
 }
 
+const Code = ({ children }: ComponentProps<"code">) => {
+  return (
+    <code className="rounded bg-zinc-300/80 px-1.5 py-0.5 text-sm text-orange-600 dark:bg-zinc-600/80">
+      {children}
+    </code>
+  )
+}
+
 const Pre = ({ children }: ComponentProps<"pre">) => {
   if (!children || typeof children !== "object") {
-    return <code>{children}</code>
-  }
-  const childType = "type" in children ? children.type : ""
-  if (childType !== "code") {
-    return <code>{children}</code>
+    return <Code>{children}</Code>
   }
 
   const childProps = "props" in children ? children.props : {}
@@ -109,6 +113,7 @@ const Image = (props: ComponentProps<"img">) => {
 
 const overrideComponent = {
   a: Anchor,
+  code: Code,
   h2: Heading2,
   h3: Heading3,
   img: Image,
@@ -121,6 +126,7 @@ const overrideComponent = {
 }
 
 const ArticleDetailContent = ({ content }: { content: string }) => {
+  console.log(content)
   return (
     <>
       <ReactMarkdown components={overrideComponent}>{content}</ReactMarkdown>
