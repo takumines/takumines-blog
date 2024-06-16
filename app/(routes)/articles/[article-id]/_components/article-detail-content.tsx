@@ -23,7 +23,7 @@ const Heading3 = ({ children }: ComponentProps<"h3">) => {
 
 const Paragraph = ({ children }: ComponentProps<"p">) => {
   return (
-    <p className="mt-4 text-base leading-relaxed tracking-wide text-zinc-600 dark:text-zinc-200">
+    <p className="mt-1 text-base leading-relaxed tracking-wide text-zinc-600 dark:text-zinc-200">
       {children}
     </p>
   )
@@ -81,16 +81,16 @@ const Pre = ({ children }: ComponentProps<"pre">) => {
 }
 
 const UnorderedList = ({ children }: ComponentProps<"ul">) => {
-  return <ul className="list-inside list-disc">{children}</ul>
+  return <ul className="my-2 list-inside list-disc">{children}</ul>
 }
 
 const OrderedList = ({ children }: ComponentProps<"ol">) => {
-  return <ol className="list-inside list-decimal">{children}</ol>
+  return <ol className="my-2 list-inside list-decimal">{children}</ol>
 }
 
 const ListItem = ({ children }: ComponentProps<"li">) => {
   return (
-    <li className="text-base leading-relaxed tracking-wide text-zinc-600 dark:text-zinc-50">
+    <li className="mt-1 text-base leading-relaxed tracking-wide text-zinc-600 dark:text-zinc-50">
       {children}
     </li>
   )
