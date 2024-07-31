@@ -9,6 +9,14 @@ import { BASE_METADATA } from "@/app/_libs/metadata"
 import { Metadata } from "next"
 import { Suspense } from "react"
 
+export const dynamic = "force-static"
+
+/**
+ * NOTE: notion APIで取得される画像の有効期限は1時間なので、revalidateを1時間に設定し期限切れを防ぐ
+ * @see https://developers.notion.com/docs/working-with-files-and-media#retrieving-files-and-media-via-the-notion-api
+ */
+export const revalidate = 3600
+
 export const metadata: Metadata = {
   ...BASE_METADATA,
   alternates: {
