@@ -12,11 +12,11 @@ export type MultiSelect = ExtractPropertyType<
 >
 
 /**
- * PageObjectResponseのプロパティの型からFilesの型を抽出する
+ * PageObjectResponseのプロパティの型からURLの型を抽出する
  */
-export type Files = ExtractPropertyType<
+export type URL = ExtractPropertyType<
   PageObjectResponse["properties"][keyof PageObjectResponse["properties"]],
-  "files"
+  "url"
 >
 
 export type Article = {
@@ -24,7 +24,7 @@ export type Article = {
   id: string
   slug: string
   tags: string[]
-  thumbnail: string
+  thumbnailUrl: string
   title: string
 }
 

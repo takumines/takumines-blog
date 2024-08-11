@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 const ArticleSummaryCard = ({ article }: { article: Article }) => {
-  const { date, slug, tags, title } = article
+  const { date, slug, tags, thumbnailUrl, title } = article
 
   return (
     <Link href={`/articles/${slug}`}>
@@ -18,7 +18,7 @@ const ArticleSummaryCard = ({ article }: { article: Article }) => {
           alt="サムネイル画像"
           className="rounded-t-xl"
           height={232}
-          src={article.thumbnail}
+          src={thumbnailUrl}
           style={{
             height: "auto",
             width: "100%",

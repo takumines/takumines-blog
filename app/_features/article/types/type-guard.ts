@@ -1,4 +1,4 @@
-import { Files, MultiSelect } from "@/app/_features/article/types/type"
+import { MultiSelect, URL } from "@/app/_features/article/types/type"
 import {
   PageObjectResponse,
   QueryDatabaseResponse,
@@ -48,11 +48,11 @@ export const isMultiSelect = (
 }
 
 /**
- * PropertyがFilesかどうかを判定する
+ * PropertyがURLかどうかを判定する
  *
  * @param property
- * @returns {property is {files: FilesType}}
+ * @returns {property is {url: URL}}
  */
-export const isFiles = (property: any): property is { files: Files } => {
-  return property && property.type === "files"
+export const isUrl = (property: any): property is { url: URL } => {
+  return property && property.type === "url"
 }

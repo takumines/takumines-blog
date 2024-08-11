@@ -1,11 +1,10 @@
 import {
   Article,
-  Files,
-  isFiles,
+  MultiSelect,
   isMultiSelect,
   isRichText,
   isTitle,
-  MultiSelect,
+  isUrl,
 } from "@/app/_features/article/types"
 import { formatISODateTimeToDate } from "@/app/_utils/date"
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints"
@@ -29,16 +28,18 @@ export const getPageMetaData = (post: PageObjectResponse): Article => {
   const tags = isMultiSelect(properties.Tags)
     ? getTags(properties.Tags.multi_select)
     : []
-  const thumbnail = isFiles(properties.Thumbnail)
-    ? getThumbnail(properties.Thumbnail.files)
-    : "/images/default_thumbnail.png"
+
+  const thumbnailUrl =
+    isUrl(properties.ThumbnailUrl) && properties.ThumbnailUrl.url
+      ? properties.ThumbnailUrl.url
+      : "/images/default_thumbnail.png"
 
   return {
     date,
     id,
     slug,
     tags,
-    thumbnail,
+    thumbnailUrl,
     title,
   }
 }
@@ -51,15 +52,4 @@ export const getPageMetaData = (post: PageObjectResponse): Article => {
  */
 const getTags = (tags: MultiSelect): string[] => {
   return tags.map((tag) => tag.name)
-}
-
-/**
- * サムネイルの取得
- *
- * @param {FilesType} thumbnail
- * @returns {string}
- */
-const getThumbnail = (thumbnail: Files): string => {
-  const file = thumbnail[0]
-  return file?.type === "file" ? file.file.url : "/images/default_thumbnail.png"
 }

@@ -49,14 +49,14 @@ export const generateMetadata = async ({
     },
     openGraph: {
       ...BASE_METADATA.openGraph,
-      images: response.thumbnail,
+      images: response.thumbnailUrl,
       title: `${response.title} | takumines blog`,
       url,
     },
     title: `${response.title} | takumines blog`,
     twitter: {
       ...BASE_METADATA.twitter,
-      images: response.thumbnail,
+      images: response.thumbnailUrl,
       title: `${response.title} | takumines blog`,
     },
   }
