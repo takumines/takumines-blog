@@ -26,7 +26,6 @@ export const getArticleListByTag = async (
         ],
       },
     })
-    console.log(res)
 
     const articleList = res.results
 
