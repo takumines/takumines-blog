@@ -1,12 +1,15 @@
 import ArticleSummaryCard from "@/app/(routes)/(top)/_components/article-summary-card"
+import { TagIcon } from "@/app/_components/elements/icon"
 import { Spinner } from "@/app/_components/elements/spinner/spinner"
-import { getArticleList } from "@/app/_features/article/api"
+import { Tag } from "@/app/_components/elements/tag"
+import { getArticleList, getTagList } from "@/app/_features/article/api"
 import {
   INTERNAL_SERVER_ERROR_CODE,
   NotionApiError,
 } from "@/app/_features/article/error"
 import { BASE_METADATA } from "@/app/_libs/metadata"
 import { Metadata } from "next"
+import Link from "next/link"
 import { Suspense } from "react"
 
 export const dynamic = "force-static"
@@ -64,10 +67,40 @@ const ArticleList = async () => {
   )
 }
 
+const TagList = async () => {
+  const tags = await getTagList()
+
+  if (tags instanceof NotionApiError || tags.length === 0) {
+    return null
+  }
+
+  return (
+    <div className="mb-6 flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <Link href={`/articles/${tag.description}`} key={tag.name}>
+          <div
+            className="flex items-center rounded-full bg-zinc-600 px-3 py-1 hover:translate-y-[-2px]
+            hover:scale-[1.02] dark:bg-zinc-50"
+            key={tag.name}
+          >
+            <TagIcon
+              className="mr-1 text-green-400 drop-shadow-[0_0px_4px_rgba(0,0,0,0.2)]"
+              height={16}
+              width={16}
+            />
+            <Tag key={tag.name}>{tag.name}</Tag>
+          </div>
+        </Link>
+      ))}
+    </div>
+  )
+}
+
 const Top = () => {
   return (
     <article className="mt-14">
       <Suspense fallback={<Spinner className="flex justify-center" />}>
+        <TagList />
         <ArticleList />
       </Suspense>
     </article>
