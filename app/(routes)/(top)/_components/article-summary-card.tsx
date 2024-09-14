@@ -29,7 +29,7 @@ const ArticleSummaryCard = ({ article }: { article: Article }) => {
           <h2 className="line-clamp-2 justify-center break-all text-xl font-bold text-zinc-800 dark:text-zinc-50 sm:text-2xl">
             {title}
           </h2>
-          <div className="mt-2 flex">
+          <div className="mt-2 flex flex-wrap">
             {tags.map((tag) => (
               <div className="mr-3 flex items-center" key={tag}>
                 <TagIcon
