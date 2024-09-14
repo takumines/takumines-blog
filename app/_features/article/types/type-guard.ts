@@ -1,4 +1,8 @@
-import { MultiSelect, URL } from "@/app/_features/article/types/type"
+import {
+  MultiSelect,
+  MultiSelectForDatabaseProperty,
+  URL,
+} from "@/app/_features/article/types/type"
 import {
   PageObjectResponse,
   QueryDatabaseResponse,
@@ -39,7 +43,7 @@ export const isTitle = (
  * PropertyがMultiSelectかどうかを判定する
  *
  * @param property
- * @returns {property is {multi_select: MultiSelectType}}
+ * @returns {property is {multi_select: MultiSelect}}
  */
 export const isMultiSelect = (
   property: any,
@@ -55,4 +59,18 @@ export const isMultiSelect = (
  */
 export const isUrl = (property: any): property is { url: URL } => {
   return property && property.type === "url"
+}
+
+/**
+ * DatabaseObjectResponseのプロパティがMultiSelectかどうかを判定する
+ *
+ * @param property
+ * @returns {property is {multi_select: MultiSelectForDatabaseProperty}}
+ */
+export const isMultiSelectForDatabaseProperty = (
+  property: any,
+): property is {
+  multi_select: MultiSelectForDatabaseProperty
+} => {
+  return property && property.type === "multi_select"
 }

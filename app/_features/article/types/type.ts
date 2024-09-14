@@ -1,4 +1,7 @@
-import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints"
+import {
+  DatabaseObjectResponse,
+  PageObjectResponse,
+} from "@notionhq/client/build/src/api-endpoints"
 
 type ExtractPropertyType<T, K extends string> =
   T extends Record<K, infer U> ? U : never
@@ -18,6 +21,19 @@ export type URL = ExtractPropertyType<
   PageObjectResponse["properties"][keyof PageObjectResponse["properties"]],
   "url"
 >
+
+/**
+ * DatabaseObjectResponseのプロパティの型からMultiSelectの型を抽出する
+ */
+export type MultiSelectForDatabaseProperty = ExtractPropertyType<
+  DatabaseObjectResponse["properties"][keyof DatabaseObjectResponse["properties"]],
+  "multi_select"
+>
+
+export type Tag = {
+  description: string
+  name: string
+}
 
 export type Article = {
   date: string
