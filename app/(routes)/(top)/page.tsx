@@ -77,7 +77,7 @@ const TagList = async () => {
   return (
     <div className="mb-6 flex flex-wrap gap-2">
       {tags.map((tag) => (
-        <Link href={`/articles/${tag.description}`} key={tag.name}>
+        <Link href={`/tags/${tag.description}`} key={tag.name}>
           <div
             className="flex items-center rounded-full bg-zinc-600 px-3 py-1 hover:translate-y-[-2px]
             hover:scale-[1.02] dark:bg-zinc-50"
