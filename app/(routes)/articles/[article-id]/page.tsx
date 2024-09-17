@@ -11,9 +11,6 @@ import {
 import { BASE_METADATA } from "@/app/_libs/metadata"
 import { Metadata } from "next"
 
-export const dynamic = "force-static"
-export const revalidate = 3600
-
 export const generateMetadata = async ({
   params,
 }: {
