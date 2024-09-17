@@ -2,8 +2,8 @@ import NextImage from "next/image"
 import Link from "next/link"
 import { ComponentProps } from "react"
 import ReactMarkdown from "react-markdown"
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism"
+import SyntaxHighlighter from "react-syntax-highlighter"
+import { ocean } from "react-syntax-highlighter/dist/cjs/styles/hljs"
 
 const Heading2 = ({ children }: ComponentProps<"h2">) => {
   return (
@@ -74,9 +74,19 @@ const Pre = ({ children }: ComponentProps<"pre">) => {
   const lang = languageType ? languageType.replace("language-", "") : "text"
 
   return (
-    <SyntaxHighlighter language={lang} style={dracula}>
-      {String(code).replace(/\n$/, "")}
-    </SyntaxHighlighter>
+    <div className="my-3">
+      <SyntaxHighlighter
+        customStyle={{
+          borderRadius: "4px",
+          paddingLeft: "16px",
+          paddingRight: "16px",
+        }}
+        language={lang}
+        style={ocean}
+      >
+        {String(code).replace(/\n$/, "")}
+      </SyntaxHighlighter>
+    </div>
   )
 }
 
