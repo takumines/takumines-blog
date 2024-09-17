@@ -7,7 +7,7 @@ import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism"
 
 const Heading2 = ({ children }: ComponentProps<"h2">) => {
   return (
-    <h2 className="mb-5 mt-9 text-3xl tracking-wide text-zinc-800 dark:text-zinc-50 sm:text-4xl">
+    <h2 className="mb-5 mt-12 rounded border-l-8 border-l-green-500 bg-zinc-200 px-3 py-2 text-3xl tracking-wide text-zinc-800 dark:bg-zinc-700 dark:text-zinc-50 sm:text-4xl">
       {children}
     </h2>
   )
@@ -15,7 +15,7 @@ const Heading2 = ({ children }: ComponentProps<"h2">) => {
 
 const Heading3 = ({ children }: ComponentProps<"h3">) => {
   return (
-    <h3 className="mb-4 mt-8 text-2xl tracking-wide text-zinc-800 dark:text-zinc-50 sm:text-3xl">
+    <h3 className="mb-4 mt-8 border-b-2 border-zinc-800 pb-2 text-2xl tracking-wide text-zinc-800 dark:border-zinc-200 dark:text-zinc-50 sm:text-3xl">
       {children}
     </h3>
   )
