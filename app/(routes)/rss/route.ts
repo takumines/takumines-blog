@@ -27,7 +27,7 @@ export async function GET() {
   response.forEach((article) => {
     baseRss.item({
       date: article.date,
-      description: `article.title | takumines blog`,
+      description: `${article.title} | takumines blog`,
       title: article.title,
       url: `${URL}/articles/${article.slug}`,
     })
