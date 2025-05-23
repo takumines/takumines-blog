@@ -2,7 +2,7 @@
 
 ## Tech Stack
 - React v18.2
-- Next.js v14.1
+- Next.js v14.2
 - TypeScript v5.3.3
 - Tailwind CSS v3.4.3
 - @notionhq/client v2.2.15
