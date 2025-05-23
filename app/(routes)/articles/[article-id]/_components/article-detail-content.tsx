@@ -1,6 +1,6 @@
 import NextImage from "next/image"
 import Link from "next/link"
-import { ComponentProps } from "react"
+import type { ComponentProps } from "react"
 import ReactMarkdown from "react-markdown"
 import SyntaxHighlighter from "react-syntax-highlighter"
 import { ocean } from "react-syntax-highlighter/dist/cjs/styles/hljs"
@@ -43,12 +43,13 @@ const Anchor = ({ children, href }: ComponentProps<"a">) => {
       className="mt-4 text-base leading-relaxed tracking-wide text-green-500 underline"
       href={href}
     >
-      <a>{children}</a>
+      <a href={href}>{children}</a>
     </Link>
   ) : (
     <a
       className="mt-4 text-base leading-relaxed tracking-wide text-green-500 underline"
       href={href}
+      rel="noreferrer"
       target="_blank"
     >
       {children}
@@ -74,7 +75,7 @@ const Pre = ({ children }: ComponentProps<"pre">) => {
   const lang = languageType ? languageType.replace("language-", "") : "text"
 
   return (
-    <div className="my-3">
+    <div className="my-3 overflow-x-auto whitespace-pre-wrap">
       <SyntaxHighlighter
         customStyle={{
           borderRadius: "4px",
