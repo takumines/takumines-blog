@@ -1,0 +1,166 @@
+---
+description: 
+globs: "**/*.tsx", "**/*.css", "app/globals.css", "tailwind.config.*"
+alwaysApply: false
+---
+# スタイリング規約
+
+[tailwind.config.ts](mdc:tailwind.config.ts)と[app/globals.css](mdc:app/globals.css)に基づくスタイリングルールです。
+
+## Tailwind CSS基本ルール
+
+### ユーティリティファースト
+```tsx
+// 良い例: Tailwindクラスを基本とする
+<div className="flex flex-col gap-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+    記事タイトル
+  </h2>
+  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+    記事の内容...
+  </p>
+</div>
+
+// 避ける: カスタムCSSの多用
+<div className="custom-card">  {/* 避ける */}
+```
+
+### クラス名の順序
+レイアウト → 視覚 → インタラクション の順序で記述：
+```tsx
+<button className="
+  flex items-center justify-center     // レイアウト
+  px-4 py-2 rounded-md                // 視覚
+  bg-blue-500 text-white              // 色
+  hover:bg-blue-600 transition-colors // インタラクション
+">
+  ボタン
+</button>
+```
+
+## レスポンシブデザイン
+
+### モバイルファースト
+```tsx
+<div className="
+  grid grid-cols-1           // モバイル: 1列
+  md:grid-cols-2            // タブレット: 2列
+  lg:grid-cols-3            // デスクトップ: 3列
+  gap-4 md:gap-6 lg:gap-8   // 間隔も段階的に
+">
+```
+
+### ブレークポイント活用
+```tsx
+<article className="
+  p-4 md:p-6 lg:p-8         // パディング調整
+  text-sm md:text-base lg:text-lg  // フォントサイズ調整
+">
+```
+
+## ダークモード対応
+
+### next-themesとの連携
+```tsx
+// テーマ切り替えボタン
+"use client"
+import { useTheme } from "next-themes"
+
+export const ThemeToggle = () => {
+  const { theme, setTheme } = useTheme()
+  
+  return (
+    <button 
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      className="p-2 rounded-md bg-gray-200 dark:bg-gray-700"
+    >
+      {theme === "dark" ? "🌞" : "🌙"}
+    </button>
+  )
+}
+```
+
+### ダークモードクラス
+```tsx
+<div className="
+  bg-white dark:bg-gray-900           // 背景色
+  text-gray-900 dark:text-white       // テキスト色
+  border-gray-200 dark:border-gray-700 // ボーダー色
+">
+```
+
+## コンポーネント固有スタイル
+
+### 条件付きスタイリング
+```tsx
+import { clsx } from "clsx"
+
+interface ButtonProps {
+  variant: "primary" | "secondary"
+  size: "sm" | "md" | "lg"
+  disabled?: boolean
+}
+
+export const Button = ({ variant, size, disabled, children }: ButtonProps) => {
+  return (
+    <button
+      className={clsx(
+        // ベーススタイル
+        "font-medium rounded-md transition-colors",
+        
+        // バリアント
+        {
+          "bg-blue-500 text-white hover:bg-blue-600": variant === "primary",
+          "bg-gray-200 text-gray-900 hover:bg-gray-300": variant === "secondary"
+        },
+        
+        // サイズ
+        {
+          "px-2 py-1 text-sm": size === "sm",
+          "px-4 py-2 text-base": size === "md",
+          "px-6 py-3 text-lg": size === "lg"
+        },
+        
+        // 状態
+        {
+          "opacity-50 cursor-not-allowed": disabled
+        }
+      )}
+      disabled={disabled}
+    >
+      {children}
+    </button>
+  )
+}
+```
+
+## カスタムCSS（最小限）
+
+### グローバルスタイル
+[app/globals.css](mdc:app/globals.css)でのみ定義：
+```css
+/* 必要最小限のカスタムスタイル */
+.prose {
+  @apply max-w-none;
+}
+
+.prose h1 {
+  @apply text-3xl font-bold mb-4;
+}
+
+.prose h2 {
+  @apply text-2xl font-semibold mb-3;
+}
+```
+
+### コンポーネント固有CSS
+```tsx
+// CSS Modulesまたはstyled-componentsは避ける
+// Tailwindで表現できない場合のみstyle属性を使用
+<div 
+  style={{ 
+    background: `linear-gradient(45deg, ${color1}, ${color2})` 
+  }}
+  className="p-4 rounded-lg"
+>
+```

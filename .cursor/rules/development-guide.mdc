@@ -1,0 +1,138 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 開発ガイドライン
+
+takumines-blogプロジェクト（Next.js + Notion連携ブログサービス）の開発ガイドラインです。
+
+## プロジェクト概要
+
+NotionをCMSとして活用し、記事データを取得してNext.jsで配信するブログサービスです。
+
+## 開発環境セットアップ
+
+### 必須ツール
+- **Node.js**: v18以上（[.node-version](mdc:.node-version)参照）
+- **パッケージマネージャー**: yarn（[yarn.lock](mdc:yarn.lock)使用）
+- **エディター**: VSCode推奨（[.vscode/](mdc:.vscode)設定済み）
+
+### 初回セットアップ
+```bash
+# 依存関係のインストール
+yarn install
+
+# 環境変数の設定
+cp .env.example .env.local
+# NOTION_TOKEN等を設定
+
+# 開発サーバー起動
+yarn dev
+```
+
+### 開発コマンド
+```bash
+yarn dev       # 開発サーバー起動（http://localhost:3000）
+yarn build     # プロダクションビルド
+yarn start     # プロダクション起動
+yarn lint      # ESLintチェック
+yarn fix       # 自動フォーマット・修正
+```
+
+## コード規約
+
+各分野の詳細なコーディングルールは以下を参照：
+
+### 📁 [プロジェクト構造と命名規則](mdc:project-structure.mdc)
+- ディレクトリ構造の定義
+- ファイル・変数・関数の命名規則
+- コンポーネントの配置ルール
+
+### 🔷 [TypeScript規約](mdc:typescript-rules.mdc)
+- 型定義とアノテーションルール
+- インポート・エクスポート方針
+- エラーハンドリングパターン
+
+### ⚛️ [React・Next.js規約](mdc:react-nextjs-rules.mdc)
+- コンポーネント設計パターン
+- App Router活用方法
+- State管理とパフォーマンス最適化
+
+### 🎨 [スタイリング規約](mdc:styling-rules.mdc)
+- Tailwind CSS使用方針
+- レスポンシブデザインルール
+- ダークモード対応
+
+### 📝 [Notion連携実装規約](mdc:notion-integration.mdc)
+- Notion API呼び出しパターン
+- データ変換とキャッシュ戦略
+- 画像最適化
+
+## 開発ワークフロー
+
+### ブランチ戦略
+```bash
+main          # 本番環境
+develop       # 開発環境
+feature/*     # 機能開発
+hotfix/*      # 緊急修正
+```
+
+### コミット前チェック
+```bash
+# 自動実行される（husky + lint-staged設定済み）
+yarn lint     # ESLintチェック
+yarn fix      # 自動フォーマット
+```
+
+### デプロイメント
+- **開発環境**: developブランチへのpush時に自動デプロイ
+- **本番環境**: mainブランチへのマージ時に自動デプロイ
+
+## 技術スタック
+
+### フロントエンド
+- **フレームワーク**: Next.js 14（App Router）
+- **言語**: TypeScript
+- **スタイリング**: Tailwind CSS
+- **テーマ**: next-themes（ダークモード対応）
+
+### バックエンド・API
+- **CMS**: Notion API（[@notionhq/client](mdc:package.json)）
+- **マークダウン変換**: notion-to-md
+- **RSS生成**: rss
+
+### 開発ツール
+- **リンター**: ESLint（[.eslintrc.json](mdc:.eslintrc.json)）
+- **フォーマッター**: Prettier（[.prettierrc](mdc:.prettierrc)）
+- **型チェック**: TypeScript（[tsconfig.json](mdc:tsconfig.json)）
+
+## トラブルシューティング
+
+### よくある問題
+
+#### Notion API接続エラー
+```bash
+# 環境変数を確認
+echo $NOTION_TOKEN
+
+# Notionデータベースのアクセス権限を確認
+```
+
+#### ビルドエラー
+```bash
+# キャッシュクリア
+rm -rf .next
+yarn build
+```
+
+#### 型エラー
+```bash
+# 型チェック実行
+yarn tsc --noEmit
+```
+
+## ドキュメント更新
+
+このガイドラインは、プロジェクトの成長に合わせて継続的に更新します。変更提案は該当ファイルを直接編集してください。

@@ -1,0 +1,209 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Notion連携実装規約
+
+[package.json](mdc:package.json)の依存関係（`@notionhq/client`, `notion-to-md`）を使用したNotion API実装ルールです。
+
+## API呼び出しパターン
+
+### 基本的なクライアント設定
+```typescript
+// app/_libs/notion/client.ts
+import { Client } from "@notionhq/client"
+
+export const notion = new Client({
+  auth: process.env.NOTION_TOKEN,
+})
+
+// 型安全なページ取得
+export const fetchNotionPage = async (pageId: string): Promise<NotionPage> => {
+  try {
+    const response = await notion.pages.retrieve({ 
+      page_id: pageId 
+    })
+    return transformNotionPage(response)
+  } catch (error) {
+    throw new NotionApiError(`Failed to fetch page: ${pageId}`, error)
+  }
+}
+```
+
+### エラーハンドリング
+```typescript
+// app/_libs/notion/errors.ts
+export class NotionApiError extends Error {
+  constructor(
+    message: string,
+    public originalError?: unknown,
+    public pageId?: string
+  ) {
+    super(message)
+    this.name = "NotionApiError"
+  }
+}
+
+// 使用例
+const handleNotionError = (error: unknown, pageId: string) => {
+  if (error instanceof NotionApiError) {
+    console.error(`Notion API Error for page ${pageId}:`, error.message)
+    return null
+  }
+  throw error
+}
+```
+
+## データ変換パターン
+
+### notion-to-mdを使用したマークダウン変換
+```typescript
+// app/_libs/notion/markdown.ts
+import { NotionToMarkdown } from "notion-to-md"
+
+const n2m = new NotionToMarkdown({ notionClient: notion })
+
+export const convertToMarkdown = async (pageId: string): Promise<string> => {
+  try {
+    const mdblocks = await n2m.pageToMarkdown(pageId)
+    return n2m.toMarkdownString(mdblocks).parent
+  } catch (error) {
+    throw new NotionApiError(`Markdown conversion failed: ${pageId}`, error)
+  }
+}
+```
+
+### メタデータ抽出
+```typescript
+// app/_libs/notion/metadata.ts
+interface NotionPageMetadata {
+  id: string
+  title: string
+  publishedAt: Date
+  tags: string[]
+  coverImage?: string
+}
+
+export const extractMetadata = (page: any): NotionPageMetadata => {
+  const properties = page.properties
+  
+  return {
+    id: page.id,
+    title: extractTitle(properties.Title || properties.Name),
+    publishedAt: new Date(properties.PublishedAt?.date?.start || page.created_time),
+    tags: extractMultiSelect(properties.Tags),
+    coverImage: page.cover?.external?.url || page.cover?.file?.url
+  }
+}
+
+const extractTitle = (titleProperty: any): string => {
+  return titleProperty?.title?.[0]?.plain_text || "無題"
+}
+
+const extractMultiSelect = (multiSelectProperty: any): string[] => {
+  return multiSelectProperty?.multi_select?.map((item: any) => item.name) || []
+}
+```
+
+## キャッシュ戦略
+
+### Next.js App Routerでのキャッシュ
+```typescript
+// app/_libs/notion/cache.ts
+import { unstable_cache } from "next/cache"
+
+// 記事データのキャッシュ（1時間）
+export const getCachedArticle = unstable_cache(
+  async (pageId: string) => {
+    const page = await fetchNotionPage(pageId)
+    const content = await convertToMarkdown(pageId)
+    return { ...page, content }
+  },
+  ["notion-article"],
+  { revalidate: 3600 } // 1時間
+)
+
+// 記事一覧のキャッシュ（30分）
+export const getCachedArticleList = unstable_cache(
+  async () => {
+    return await fetchArticleList()
+  },
+  ["notion-article-list"],
+  { revalidate: 1800 } // 30分
+)
+```
+
+### ISR（Incremental Static Regeneration）
+```typescript
+// app/articles/[id]/page.tsx
+export const revalidate = 3600 // 1時間ごとに再生成
+
+export default async function ArticlePage({ params }: { params: { id: string } }) {
+  const article = await getCachedArticle(params.id)
+  
+  if (!article) {
+    notFound()
+  }
+  
+  return <ArticleDetail article={article} />
+}
+```
+
+## 画像最適化
+
+### Next.js Imageコンポーネントとの連携
+```typescript
+// app/_components/elements/NotionImage.tsx
+import Image from "next/image"
+
+interface NotionImageProps {
+  src: string
+  alt: string
+  width?: number
+  height?: number
+}
+
+export const NotionImage = ({ src, alt, width = 800, height = 400 }: NotionImageProps) => {
+  // Notion画像URLの最適化
+  const optimizedSrc = src.includes("notion.so") 
+    ? `${src}&width=${width}&height=${height}`
+    : src
+  
+  return (
+    <Image
+      src={optimizedSrc}
+      alt={alt}
+      width={width}
+      height={height}
+      className="rounded-lg shadow-md"
+      placeholder="blur"
+      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+    />
+  )
+}
+```
+
+## 型定義
+
+### Notion APIレスポンスの型
+```typescript
+// app/_libs/notion/types.ts
+export interface NotionPage {
+  id: string
+  created_time: string
+  last_edited_time: string
+  properties: Record<string, any>
+  cover: {
+    type: "external" | "file"
+    external?: { url: string }
+    file?: { url: string }
+  } | null
+}
+
+export interface ArticleData extends NotionPageMetadata {
+  content: string
+  excerpt: string
+  readingTime: number
+}
+```
