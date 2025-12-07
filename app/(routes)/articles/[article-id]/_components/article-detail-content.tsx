@@ -7,7 +7,7 @@ import { ocean } from "react-syntax-highlighter/dist/cjs/styles/hljs"
 
 const Heading2 = ({ children }: ComponentProps<"h2">) => {
   return (
-    <h2 className="mb-5 mt-12 rounded border-l-8 border-l-green-500 bg-zinc-200 px-3 py-2 text-3xl tracking-wide text-zinc-800 dark:bg-zinc-700 dark:text-zinc-50 sm:text-4xl">
+    <h2 className="mb-5 mt-12 rounded-sm border-l-8 border-l-green-500 bg-zinc-200 px-3 py-2 text-3xl tracking-wide text-zinc-800 dark:bg-zinc-700 dark:text-zinc-50 sm:text-4xl">
       {children}
     </h2>
   )
@@ -59,7 +59,7 @@ const Anchor = ({ children, href }: ComponentProps<"a">) => {
 
 const Code = ({ children }: ComponentProps<"code">) => {
   return (
-    <code className="rounded bg-zinc-300/80 px-1.5 py-0.5 text-sm text-orange-600 dark:bg-zinc-600/80">
+    <code className="rounded-sm bg-zinc-300/80 px-1.5 py-0.5 text-sm text-orange-600 dark:bg-zinc-600/80">
       {children}
     </code>
   )

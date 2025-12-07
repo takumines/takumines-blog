@@ -5,7 +5,7 @@ export const Spinner = ({ className }: { className: string }) => {
     <div className={clsx(className)} role="status">
       <svg
         aria-hidden="true"
-        className="fill-limeGreen size-8 animate-spin text-black/[0.6]"
+        className="fill-limeGreen size-8 animate-spin text-black/60"
         fill="none"
         viewBox="0 0 100 101"
         xmlns="http://www.w3.org/2000/svg"
