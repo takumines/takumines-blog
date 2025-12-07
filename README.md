@@ -3,10 +3,10 @@
 ## Tech Stack
 - React v19.2.1
 - Next.js v16.0.7
-- TypeScript v5
-- Tailwind CSS v3.4.3
-- @notionhq/client v2.2.15
-- react-markdown v9.0.1
+- TypeScript v5.9.3
+- Tailwind CSS v4.1.17
+- @notionhq/client v2.3.0
+- react-markdown v9.1.0
 
 ## Getting Started
 ### Setup Notion
