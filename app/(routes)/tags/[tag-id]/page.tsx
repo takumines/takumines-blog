@@ -13,6 +13,18 @@ import { BASE_METADATA } from "@/app/_libs/metadata"
 export const dynamic = "force-static"
 export const revalidate = 3600
 
+export const generateStaticParams = async () => {
+  const tagList = await getTagList()
+
+  if (tagList instanceof NotionApiError) {
+    return []
+  }
+
+  return tagList.map((tag) => ({
+    "tag-id": tag.description,
+  }))
+}
+
 export const generateMetadata = async ({
   params,
 }: {
