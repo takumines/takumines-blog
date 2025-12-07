@@ -1,9 +1,9 @@
 # Takumines Blog
 
 ## Tech Stack
-- React v18.2
-- Next.js v14.2
-- TypeScript v5.3.3
+- React v19.2.1
+- Next.js v16.0.7
+- TypeScript v5
 - Tailwind CSS v3.4.3
 - @notionhq/client v2.2.15
 - react-markdown v9.0.1

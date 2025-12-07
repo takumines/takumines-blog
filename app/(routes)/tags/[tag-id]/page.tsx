@@ -16,9 +16,10 @@ export const revalidate = 3600
 export const generateMetadata = async ({
   params,
 }: {
-  params: { "tag-id": string }
+  params: Promise<{ "tag-id": string }>
 }): Promise<Metadata> => {
-  const url = `/tags/${params["tag-id"]}`
+  const { "tag-id": tagId } = await params
+  const url = `/tags/${tagId}`
   // タグ一覧からタグID(Notionで設定したタグのdescription)に紐づくタグ名を取得
   const tagList = await getTagList()
 
@@ -36,8 +37,8 @@ export const generateMetadata = async ({
   }
 
   const tag =
-    tagList.find((tag) => tag.description === params["tag-id"])?.name ||
-    params["tag-id"]
+    tagList.find((tag) => tag.description === tagId)?.name ||
+    tagId
   const title = `${tag}の記事一覧 | takumines blog`
 
   return {
@@ -112,11 +113,12 @@ const ArticleListByTag = async ({ tagId }: { tagId: string }) => {
   )
 }
 
-const TagPage = ({
-  params: { "tag-id": tagId },
+const TagPage = async ({
+  params,
 }: {
-  params: { "tag-id": string }
+  params: Promise<{ "tag-id": string }>
 }) => {
+  const { "tag-id": tagId } = await params
   return (
     <article className="mt-14">
       <Suspense fallback={<Spinner className="flex justify-center" />}>

@@ -65,12 +65,17 @@ const Code = ({ children }: ComponentProps<"code">) => {
   )
 }
 
+interface CodeProps {
+  children?: React.ReactNode
+  className?: string
+}
+
 const Pre = ({ children }: ComponentProps<"pre">) => {
   if (!children || typeof children !== "object") {
     return <Code>{children}</Code>
   }
 
-  const childProps = "props" in children ? children.props : {}
+  const childProps = ("props" in children ? children.props : {}) as CodeProps
   const { children: code, className: languageType } = childProps
   const lang = languageType ? languageType.replace("language-", "") : "text"
 
@@ -108,11 +113,13 @@ const ListItem = ({ children }: ComponentProps<"li">) => {
 }
 
 const Image = (props: ComponentProps<"img">) => {
+  const src = typeof props.src === "string" ? props.src : "/images/default_thumbnail.png"
+
   return (
     <NextImage
       alt={`画像の説明: ${props.alt ?? ""}`}
       height={800}
-      src={props.src ?? "/images/default_thumbnail.png"}
+      src={src}
       style={{
         height: "auto",
         width: "100%",
