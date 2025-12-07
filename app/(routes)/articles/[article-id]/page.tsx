@@ -2,7 +2,7 @@ import ArticleDetailContent from "@/app/(routes)/articles/[article-id]/_componen
 import { LinkButton } from "@/app/_components/elements/button"
 import { TagIcon } from "@/app/_components/elements/icon/tag-icon"
 import { UpdatedAtIcon } from "@/app/_components/elements/icon/updated-at-icon"
-import { getArticleDetail } from "@/app/_features/article/api"
+import { getArticleDetail, getArticleList } from "@/app/_features/article/api"
 import {
   INTERNAL_SERVER_ERROR_CODE,
   NOT_FOUND_ERROR_CODE,
@@ -13,6 +13,18 @@ import { Metadata } from "next"
 
 export const dynamic = "force-static"
 export const revalidate = 600
+
+export const generateStaticParams = async () => {
+  const articleList = await getArticleList()
+
+  if (articleList instanceof NotionApiError) {
+    return []
+  }
+
+  return articleList.map((article) => ({
+    "article-id": article.slug,
+  }))
+}
 
 export const generateMetadata = async ({
   params,
