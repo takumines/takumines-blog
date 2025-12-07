@@ -22,7 +22,7 @@ export const generateStaticParams = async () => {
   }
 
   return articleList.map((article) => ({
-    "article-id": article.id,
+    "article-id": article.slug,
   }))
 }
 
