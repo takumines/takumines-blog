@@ -1,0 +1,70 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# プロジェクト構造と命名規則
+
+takumines-blogプロジェクトのディレクトリ構造と命名規則を定義します。
+
+## ディレクトリ構造
+
+メインエントリーポイント: [app/layout.tsx](mdc:app/layout.tsx)
+
+```
+app/
+├── _components/           # 共通コンポーネント
+│   ├── elements/         # 基本UI要素（Button, Input等）
+│   └── navigation/       # ナビゲーション関連
+├── _features/            # 機能別モジュール
+│   └── article/         # 記事関連機能
+├── _libs/               # 外部ライブラリのラッパー
+│   ├── notion/          # Notion API関連
+│   └── metadata/        # メタデータ処理
+├── _utils/              # ユーティリティ関数
+├── _themes/             # テーマ・スタイル関連
+├── (routes)/            # App Routerのルート
+└── globals.css          # グローバルスタイル
+```
+
+## 命名規則
+
+### ファイル命名
+- **コンポーネント**: `PascalCase.tsx` (例: `ArticleCard.tsx`)
+- **ユーティリティ**: `kebab-case.ts` (例: `date-utils.ts`)
+- **API関連**: `kebab-case.ts` (例: `notion-client.ts`)
+
+### ディレクトリ命名
+- **プライベート**: `_kebab-case` (例: `_components`)
+- **パブリック**: `kebab-case` (例: `(routes)`)
+
+### 変数・関数命名
+```typescript
+// 変数・関数: camelCase
+const articleData = await fetchNotionPage()
+
+// 定数: UPPER_SNAKE_CASE
+const API_BASE_URL = "https://api.notion.com"
+
+// 型・インターフェース: PascalCase
+interface ArticleMetadata {
+  id: string
+  title: string
+}
+
+// カスタムフック: useプレフィックス
+const useArticleData = () => { /* ... */ }
+
+// Propsインターフェース: ComponentNameProps
+interface ArticleCardProps {
+  article: ArticleMetadata
+}
+```
+
+## 配置ルール
+
+- **再利用可能なUI**: `app/_components/elements/`
+- **機能固有のコンポーネント**: `app/_features/{feature}/`
+- **API呼び出し**: `app/_libs/{service}/`
+- **純粋関数**: `app/_utils/`
+- **型定義**: 小さい型は同ファイル内、複雑な型は`types/`ディレクトリ

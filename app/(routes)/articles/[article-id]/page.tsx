@@ -17,10 +17,11 @@ export const revalidate = 600
 export const generateMetadata = async ({
   params,
 }: {
-  params: { "article-id": string }
+  params: Promise<{ "article-id": string }>
 }): Promise<Metadata> => {
-  const response = await getArticleDetail(params["article-id"])
-  const url = `/articles/${params["article-id"]}`
+  const { "article-id": articleId } = await params
+  const response = await getArticleDetail(articleId)
+  const url = `/articles/${articleId}`
 
   if (response instanceof NotionApiError || !response) {
     const titleForError = "記事詳細 | takumines blog"
@@ -63,10 +64,11 @@ export const generateMetadata = async ({
 }
 
 const ArticleDetailPage = async ({
-  params: { "article-id": articleId },
+  params,
 }: {
-  params: { "article-id": string }
+  params: Promise<{ "article-id": string }>
 }) => {
+  const { "article-id": articleId } = await params
   const response = await getArticleDetail(articleId)
 
   if (response instanceof NotionApiError) {

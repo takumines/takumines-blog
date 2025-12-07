@@ -1,0 +1,112 @@
+---
+description: 
+globs: "**/*.ts", "**/*.tsx", "**/*.d.ts"
+alwaysApply: false
+---
+# TypeScript規約
+
+[tsconfig.json](mdc:tsconfig.json)の設定に基づくTypeScript開発ルールです。
+
+## 型定義ルール
+
+### 必須の型アノテーション
+```typescript
+// 関数の引数と戻り値は必須
+export const fetchArticle = async (id: string): Promise<Article> => {
+  // 実装
+}
+
+// オブジェクトのプロパティは明示的に
+interface ArticleMetadata {
+  id: string
+  title: string
+  publishedAt: Date
+  category?: string  // オプショナルは?を使用
+}
+```
+
+### Union型の活用
+```typescript
+// 列挙可能な値はUnion型で
+type ArticleStatus = "draft" | "published" | "archived"
+type Theme = "light" | "dark"
+
+// 条件分岐で型安全性を確保
+const getStatusColor = (status: ArticleStatus): string => {
+  switch (status) {
+    case "draft": return "gray"
+    case "published": return "green"
+    case "archived": return "red"
+  }
+}
+```
+
+## インポート・エクスポートルール
+
+### エクスポート方針
+```typescript
+// Named Exportを基本とする
+export const ArticleCard = ({ article }: ArticleCardProps) => { /* ... */ }
+export const useArticleData = () => { /* ... */ }
+export type { ArticleMetadata }
+
+// Default Exportはコンポーネントファイルのみ
+export default ArticleCard
+```
+
+### インポート順序
+[.prettierrc](mdc:.prettierrc)の`prettier-plugin-organize-imports`で自動整理：
+```typescript
+// 1. 外部ライブラリ
+import { NextPage } from "next"
+import { useState } from "react"
+
+// 2. 内部モジュール
+import { ArticleCard } from "@/app/_components/elements/ArticleCard"
+import { fetchNotionPage } from "@/app/_libs/notion/client"
+```
+
+## ジェネリクス活用
+
+```typescript
+// 再利用可能な型定義
+interface ApiResponse<T> {
+  data: T
+  status: number
+  message?: string
+}
+
+// 汎用的なフック
+const useApiData = <T>(url: string): ApiResponse<T> | null => {
+  // 実装
+}
+```
+
+## エラーハンドリング
+
+```typescript
+// カスタムエラー型
+class NotionApiError extends Error {
+  constructor(
+    message: string,
+    public statusCode: number,
+    public pageId?: string
+  ) {
+    super(message)
+    this.name = "NotionApiError"
+  }
+}
+
+// 型安全なエラーハンドリング
+const fetchNotionPage = async (pageId: string): Promise<NotionPage> => {
+  try {
+    const response = await notion.pages.retrieve({ page_id: pageId })
+    return transformNotionPage(response)
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new NotionApiError(error.message, 500, pageId)
+    }
+    throw new NotionApiError("Unknown error", 500, pageId)
+  }
+}
+```

@@ -7,7 +7,7 @@ import { ocean } from "react-syntax-highlighter/dist/cjs/styles/hljs"
 
 const Heading2 = ({ children }: ComponentProps<"h2">) => {
   return (
-    <h2 className="mb-5 mt-12 rounded border-l-8 border-l-green-500 bg-zinc-200 px-3 py-2 text-3xl tracking-wide text-zinc-800 dark:bg-zinc-700 dark:text-zinc-50 sm:text-4xl">
+    <h2 className="mb-5 mt-12 rounded-sm border-l-8 border-l-green-500 bg-zinc-200 px-3 py-2 text-3xl tracking-wide text-zinc-800 dark:bg-zinc-700 dark:text-zinc-50 sm:text-4xl">
       {children}
     </h2>
   )
@@ -59,10 +59,15 @@ const Anchor = ({ children, href }: ComponentProps<"a">) => {
 
 const Code = ({ children }: ComponentProps<"code">) => {
   return (
-    <code className="rounded bg-zinc-300/80 px-1.5 py-0.5 text-sm text-orange-600 dark:bg-zinc-600/80">
+    <code className="rounded-sm bg-zinc-300/80 px-1.5 py-0.5 text-sm text-orange-600 dark:bg-zinc-600/80">
       {children}
     </code>
   )
+}
+
+interface CodeProps {
+  children?: React.ReactNode
+  className?: string
 }
 
 const Pre = ({ children }: ComponentProps<"pre">) => {
@@ -70,7 +75,7 @@ const Pre = ({ children }: ComponentProps<"pre">) => {
     return <Code>{children}</Code>
   }
 
-  const childProps = "props" in children ? children.props : {}
+  const childProps = ("props" in children ? children.props : {}) as CodeProps
   const { children: code, className: languageType } = childProps
   const lang = languageType ? languageType.replace("language-", "") : "text"
 
@@ -108,11 +113,13 @@ const ListItem = ({ children }: ComponentProps<"li">) => {
 }
 
 const Image = (props: ComponentProps<"img">) => {
+  const src = typeof props.src === "string" ? props.src : "/images/default_thumbnail.png"
+
   return (
     <NextImage
       alt={`画像の説明: ${props.alt ?? ""}`}
       height={800}
-      src={props.src ?? "/images/default_thumbnail.png"}
+      src={src}
       style={{
         height: "auto",
         width: "100%",
